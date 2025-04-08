@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Running './gradlew detekt'..."
+if ./gradlew detekt; then
+    echo "Detekt passed ✅"
+
+    git add -A
+
+    commit_hash=$(git log -n 1 --pretty=format:"%H")
+    git commit --fixup "$commit_hash"
+
+    git push
+else
+    echo "Detekt failed ❌"
+    exit 1
+fi
