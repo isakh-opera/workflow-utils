@@ -5,16 +5,18 @@ if ./gradlew detekt; then
     echo "Detekt passed ✅"
 
     git add -A
+    
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    revision="${branch#*/}"
+    ticket="${revision%%/*}"
 
-    read -p "Enter ticket number: " ticket
     read -p "Enter commit message title: " message
     read -p "Enter commit description: " description
 
-    git commit -m "GL-${ticket}: ${message}" -m "${description}"
+    git commit -m "${ticket}: ${message}" -m "${description}"
 
-    git push
+    git push --set-upstream origin "${branch}"
 else
     echo "Detekt failed ❌"
     exit 1
 fi
-
