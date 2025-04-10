@@ -1,0 +1,9 @@
+#!/bin/bash
+
+git switch master
+git pull
+
+read -p "Enter ticket number: " ticket
+read -p "Enter revision: " revision
+
+git checkout -b "isakh/GL-${ticket}/${revision}"
