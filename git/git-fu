@@ -1,13 +1,19 @@
 #!/bin/bash
 
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <commit-hash>"
+  exit 1
+fi
+
+hash=$1
+
 echo "Running './gradlew detekt'..."
 if ./gradlew detekt; then
     echo "Detekt passed ✅"
 
     git add -A
 
-    commit_hash=$(git log -n 1 --pretty=format:"%H")
-    git commit --fixup "$commit_hash"
+    git commit --fixup "$hash" -e
 
     git push
 else
