@@ -1,9 +1,16 @@
 #!/bin/bash
 
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <ticket-number> <revision>"
+  exit 1
+fi
+
+ticket=$1
+revision=$2
+
 git switch master
 git pull
 
-read -p "Enter ticket number: " ticket
-read -p "Enter revision: " revision
-
 git checkout -b "isakh/GL-${ticket}/${revision}"
+
+echo "Branch 'isakh/GL-${ticket}/${revision}' created and checked out successfully!"
