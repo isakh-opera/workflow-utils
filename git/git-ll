@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <amount-of-commits>"
+  exit 1
+fi
+
+git log --author="Isak Horvath" --oneline -n $1
